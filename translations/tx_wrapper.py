@@ -11,6 +11,8 @@ from txclib.log import set_log_level, logger
 
 reload(sys) # WTF? Otherwise setdefaultencoding doesn't work
 
+from translations.utils import system
+
 # This block ensures that ^C interrupts are handled quietly.
 try:
     import signal
@@ -46,6 +48,11 @@ def main():
                   " command`"
 
     argv = sys.argv[1:]
+
+    if argv[0] == 'status':
+        print system('bin/tx status')
+        return
+
     parser = OptionParser(
         usage=usage, version=get_version(), description=description
     )
