@@ -40,3 +40,4 @@ Required:
   creating a check to be sure that these are installed
 	- <repo>/.tx/config
 	- ~/.transifexrc
+	- git for _check_diff function
