@@ -1,5 +1,3 @@
-include txx
-
 # Include docs in the root.
 include *.rst
 # Include everything in our project directory.

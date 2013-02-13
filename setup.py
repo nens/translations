@@ -13,13 +13,10 @@ install_requires = [
     'transifex-client'
 ],
 
-scripts = ['txx']
-
 tests_require = []
 
 setup(name='translations',
       version=version,
-      scripts=scripts,
       description=("Transifex utility package wrapping transifex-client "
                    "commands."),
       long_description=long_description,
@@ -39,6 +36,7 @@ setup(name='translations',
       entry_points={
           'console_scripts': [
               'transifex = translations.commands:main',
+              'txx = translations.txx:main',
           ]
       },
     )
