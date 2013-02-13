@@ -41,3 +41,28 @@ Required:
 	- <repo>/.tx/config
 	- ~/.transifexrc
 	- git for _check_diff function
+
+
+Steps:
+New project:
+- add to Transifex, e.g. project lizardsystem, resource lizard-map
+- add .tx/config to repo root:
+    ---
+    [main]
+    host = https://translations.lizard.net
+    type = PO
+
+    [lizardsystem.lizard-map]
+    file_filter = lizard_map/locale/<lang>/LC_MESSAGES/django.po
+    source_file = lizard_map/locale/en/LC_MESSAGES/django.po
+    source_lang = en
+    ---
+- add translations to project's setup.py (install_requires)
+- use zc.buildout >= 2.0:
+    - add zc.buildout >= 2.0 to project's setup.py (install_requires)
+    - update buildout.cfg for 2.0:
+        - add to [buildout] show-picked-versions = true
+        - remove from [buildout] versions = 
+        - add to [versions] zc.buildout = 2.0.0
+        - add to [console_scripts] dependent-scripts = true, and eggs =: add pyflakes and translations 
+
