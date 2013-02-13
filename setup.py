@@ -19,6 +19,7 @@ tests_require = []
 
 setup(name='translations',
       version=version,
+      scripts=scripts,
       description=("Transifex utility package wrapping transifex-client "
                    "commands."),
       long_description=long_description,
