@@ -13,6 +13,17 @@ from django.core.management import call_command
 logger = logging.getLogger(__name__)
 
 
+# use our own tx command for now (copy of transifex-client tx), because
+# buildout 2.0 places the # -*- coding: utf-8 -*- under the sys.path
+# declaration and therfore causes it to fail because of an utf single quote
+# in the comment line under the if __name__ == '__main__:' line, i.e.:
+# # sys.argv[0] is the name of the script that we’re running.
+# this issue has been reported as an issue on buildout/buildout on github.
+# Our own txx command has the problematic line removed.
+# Change TX_CMD to 'tx' when buildout has this solved.
+TX_CMD = 'txx'
+
+
 def _get_app_name():
     app = os.path.basename(os.getcwd())
     app_name = app.replace('-', '_')
@@ -71,16 +82,16 @@ def upload_source_language_catalog(languages=None):
     changes.
 
     """
-    call('bin/tx push --source', shell=True)
+    call('bin/%s push --source' % TX_CMD, shell=True)
 
 
 def upload_translation_catalogs(languages=None):
     """Preferably not used, more for reference purposes."""
     if languages is None:
-        call('bin/tx push --translations', shell=True)
+        call('bin/%s push --translations' % TX_CMD, shell=True)
     else:
         for lang in languages:
-            call('bin/tx push -l %s' % lang, shell=True)
+            call('bin/%s push -l %s' % (TX_CMD, lang), shell=True)
 
 
 def fetch_language_files(languages=None):
@@ -93,12 +104,12 @@ def fetch_language_files(languages=None):
 
     # Transifex pull
     if languages is None:
-        call('bin/tx pull -a -f', shell=True)
+        call('bin/%s pull -a -f' % TX_CMD, shell=True)
         languages = sorted([d for d in os.listdir(locale_dir)
                             if not d.startswith('_')])
     else:
         for lang in languages:
-            call('bin/tx pull -f -l %(lang)s' % {'lang': lang}, shell=True)
+            call('bin/%s pull -f -l %(lang)s' % (TX_CMD, lang), shell=True)
 
     # msgcat to wrap lines and msgfmt for compilation of .mo file
     for lang in languages:
