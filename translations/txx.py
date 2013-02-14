@@ -44,7 +44,7 @@ except KeyboardInterrupt:
 sys.setdefaultencoding('utf-8')
 
 
-def main(argv):
+def main():
     """
     Here we parse the flags (short, long) and we instantiate the classes.
     """
@@ -55,7 +55,7 @@ def main(argv):
                   " check the available commands issue `%prog help` or if you"\
                   " just want help with a specific command issue `%prog help"\
                   " command`"
-
+    argv = sys.argv[1:]
     parser = OptionParser(
         usage=usage, version=get_version(), description=description
     )
@@ -116,4 +116,4 @@ def main(argv):
 
 # Run baby :) ... run
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()
