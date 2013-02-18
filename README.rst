@@ -10,7 +10,7 @@ Steps to create new resource in Transifex
 -----------------------------------------
 - generate a project and resource on https://translations.lizard.net
 - use the same name structure like we use to name our projects on github: <project>/<resource>, e.g. lizardsystem/lizard-ui
-- if not exists, create a .tx/config in the root of the translatable project, e.g.: lizard-ui/.tx/config example:
+- if not exists, create a .tx/config in the root of the translatable project, e.g.: lizard-ui/.tx/config (see example)
 - create the desired translations in the corresponding resource, e.g. nl, zh, vi
 - let the translators translate
 - if translations are updated, run ``bin/transifex fetch`` command and commit
