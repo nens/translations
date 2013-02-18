@@ -10,6 +10,11 @@ in the comment line under the if __name__ == '__main__:' line, i.e.:
 this issue has been reported as an issue on buildout/buildout on github.
 Our own txx command (this file) has the problematic line removed.
 Change TX_CMD im commands.py to 'tx' when buildout has this solved.
+
+NB: buildout >= 2.0.1 fixes this. SO this file is not needed anymore. Keeping
+it for documentation, but can be deleted after the package has proven itself
+in real circumstances.
+
 """
 
 from optparse import OptionParser, OptionValueError
