@@ -13,15 +13,7 @@ from django.core.management import call_command
 logger = logging.getLogger(__name__)
 
 
-# use our own tx command for now (copy of transifex-client tx), because
-# buildout 2.0 places the # -*- coding: utf-8 -*- under the sys.path
-# declaration and therfore causes it to fail because of an utf single quote
-# in the comment line under the if __name__ == '__main__:' line, i.e.:
-# # sys.argv[0] is the name of the script that we’re running.
-# this issue has been reported as an issue on buildout/buildout on github.
-# Our own txx command has the problematic line removed.
-# Change TX_CMD to 'tx' when buildout has this solved.
-TX_CMD = 'txx'
+TX_CMD = 'tx'  # needs buildout >= 2.0.1
 
 
 def _get_app_name():
