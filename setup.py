@@ -35,8 +35,7 @@ setup(name='translations',
       extras_require = {'test': tests_require},
       entry_points={
           'console_scripts': [
-              'transifex = translations.commands:main',
-              'txx = translations.txx:main',
+              'transifex = translations.commands:main'
           ]
       },
     )
