@@ -9,8 +9,8 @@ long_description = '\n\n'.join([
 ])
 
 install_requires = [
-    'setuptools',
-    'transifex-client'
+    'Django >= 1.4',
+    'transifex-client',
 ],
 
 tests_require = []
