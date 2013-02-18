@@ -13,7 +13,7 @@ Steps to create new resource in Transifex
 - if not exists, create a .tx/config in the root of the translatable project, e.g.: lizard-ui/.tx/config (see example)
 - create the desired translations in the corresponding resource, e.g. nl, zh, vi
 - let the translators translate
-- if translations are updated, run ``bin/transifex fetch`` command and commit
+- if translations are updated, run ``bin/transifex fetch`` command, check if everything is fine, commit and push to GitHub.
 
 ``<repo>/.tx/config`` example content:
 ::
