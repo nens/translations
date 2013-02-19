@@ -5,12 +5,13 @@ from __future__ import absolute_import
 
 import unittest
 
+import mock
 import pkg_resources
 
 from translations import commands
 
 
-class AppNameTest(unittest.TestCase):
+class SetupConfigTest(unittest.TestCase):
 
     def test_no_section(self):
         # Test on ourselves.
@@ -23,3 +24,20 @@ class AppNameTest(unittest.TestCase):
             'translations.tests', 'setup_with_sections.cfg')
         setup_config = commands.SetupConfig(config_filename=config_filename)
         self.assertEquals(setup_config.app_name(), 'tralalalations')
+
+
+class CommandsTest(unittest.TestCase):
+
+    def test_get_app_name1(self):
+        # Test on ourselves.
+        self.assertEquals(commands._get_app_name(), 'translations')
+
+    def test_get_app_dir1(self):
+        # Test on ourselves.
+        our_dir = pkg_resources.resource_filename('translations', '')
+        self.assertEquals(commands._get_app_dir(), our_dir)
+
+    @mock.patch('subprocess.call')
+    def test_upload_source_language_catalog(self, patched_call):
+        commands.upload_source_language_catalog()
+        self.assertTrue(patched_call.called())

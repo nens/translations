@@ -14,6 +14,7 @@ install_requires = [
 ],
 
 tests_require = [
+    'mock',
     'nose',
     'coverage',
     ]
