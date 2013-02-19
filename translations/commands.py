@@ -7,26 +7,86 @@ import os
 from subprocess import call, Popen, PIPE
 import sys
 
+from ConfigParser import ConfigParser, NoSectionError, NoOptionError
+
 from django.core.management import call_command
 
 
 logger = logging.getLogger(__name__)
 
 
+SETUP_CONFIG_FILE = 'setup.cfg'
 TX_CMD = 'tx'  # needs buildout >= 2.0.1
+
+
+class SetupConfig(object):
+    """Wrapper around the setup.cfg file if available.
+
+    Mostly, this is here to get app name fro translations from setup.cfg:
+
+    [translations]
+    app_name = lizard_ui
+
+    """
+
+    config_filename = SETUP_CONFIG_FILE
+
+    def __init__(self):
+        """Grab the configuration (overridable for test purposes)"""
+        # If there is a setup.cfg in the package, parse it
+        if not os.path.exists(self.config_filename):
+            self.config = None
+            return
+        self.config = ConfigParser()
+        self.config.read(self.config_filename)
+
+    def app_name(self):
+        """Return app_name from setup.cfg
+
+        e.g. setup.cfg entry
+        [translations]
+        app_name = lizard-ui
+
+        Throws an exception if not found.
+        """
+        try:
+            app_name = self.config.get('translations', 'app_name')
+        except (NoSectionError, NoOptionError, ValueError):
+            raise Exception("no [translations] app_name entry in setup.cfg")
+        else:
+            return app_name
 
 
 def _get_app_name():
     app = os.path.basename(os.getcwd())
     app_name = app.replace('-', '_')
-    return app_name
+    try:
+        __import__(app_name)
+        return app_name
+    except ImportError:
+        config = SetupConfig()
+        try:
+            print("Trying to import app name from setup.cfg: %s." % app_name)
+            app_name = config.app_name()
+        except Exception:
+            print("Could not get app name from setup.cfg. Please add "
+                  "[translations] app_name=<app_name> to your setup.cfg.")
+        else:
+            print("Trying to import app name from setup.cfg: %s." % app_name)
+            try:
+                __import__(app_name)
+                return app_name
+            except ImportError:
+                print("Could not import app name from setup.cfg, got %s. "
+                      "Please add [translations] app_name=<app_name> to your "
+                      "setup.cfg." % app_name)
+    sys.exit(1)  # get out if we get here
 
 
 def _get_app_dir():
     app_name = _get_app_name()
     module = __import__(app_name)
-    app_dir = os.path.dirname(os.path.abspath(module.__file__))
-    return app_dir
+    return os.path.dirname(os.path.abspath(module.__file__))
 
 
 def _get_locale_dir():
