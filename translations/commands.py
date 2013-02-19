@@ -29,11 +29,10 @@ class SetupConfig(object):
 
     """
 
-    config_filename = SETUP_CONFIG_FILE
-
-    def __init__(self):
+    def __init__(self, config_filename=SETUP_CONFIG_FILE):
         """Grab the configuration (overridable for test purposes)"""
         # If there is a setup.cfg in the package, parse it
+        self.config_filename = config_filename
         if not os.path.exists(self.config_filename):
             self.config = None
             return
