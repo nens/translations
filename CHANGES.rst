@@ -2,7 +2,7 @@ Changelog of nens-translations
 ===================================================
 
 
-0.2 (unreleased)
+0.2 (2013-02-19)
 ----------------
 
 - If app name can not be resolved from repo name, try to get it from setup.cfg.
