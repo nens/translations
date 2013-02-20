@@ -2,7 +2,7 @@ Changelog of nens-translations
 ===================================================
 
 
-0.3 (unreleased)
+0.3 (2013-02-20)
 ----------------
 
 - Add test setup and .travis.yml.
