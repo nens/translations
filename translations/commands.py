@@ -29,11 +29,10 @@ class SetupConfig(object):
 
     """
 
-    config_filename = SETUP_CONFIG_FILE
-
-    def __init__(self):
+    def __init__(self, config_filename=SETUP_CONFIG_FILE):
         """Grab the configuration (overridable for test purposes)"""
         # If there is a setup.cfg in the package, parse it
+        self.config_filename = config_filename
         if not os.path.exists(self.config_filename):
             self.config = None
             return
@@ -128,22 +127,26 @@ def update_source_language_catalog(languages=None):
     os.chdir(cur_dir)  # back to cur_dir
 
 
+def _run_command(command):
+    call(command, shell=True)
+
+
 def upload_source_language_catalog(languages=None):
     """Upload source language catalog file. Consider doing this automatically
     via a GitHub web hook, that checks for locale/en/LC_MESSAGES/*.po file
     changes.
 
     """
-    call('bin/%s push --source' % TX_CMD, shell=True)
+    _run_command('bin/%s push --source' % TX_CMD)
 
 
 def upload_translation_catalogs(languages=None):
     """Preferably not used, more for reference purposes."""
     if languages is None:
-        call('bin/%s push --translations' % TX_CMD, shell=True)
+        _run_command('bin/%s push --translations' % TX_CMD)
     else:
         for lang in languages:
-            call('bin/%s push -l %s' % (TX_CMD, lang), shell=True)
+            _run_command('bin/%s push -l %s' % (TX_CMD, lang))
 
 
 def fetch_language_files(languages=None):
@@ -156,20 +159,20 @@ def fetch_language_files(languages=None):
 
     # Transifex pull
     if languages is None:
-        call('bin/%s pull -a -f' % TX_CMD, shell=True)
+        _run_command('bin/%s pull -a -f' % TX_CMD)
         languages = sorted([d for d in os.listdir(locale_dir)
                             if not d.startswith('_')])
     else:
         for lang in languages:
-            call('bin/%s pull -f -l %(lang)s' % (TX_CMD, lang), shell=True)
+            _run_command('bin/%s pull -f -l %(lang)s' % (TX_CMD, lang))
 
     # msgcat to wrap lines and msgfmt for compilation of .mo file
     for lang in languages:
         po_path = '%(path)s/%(lang)s/LC_MESSAGES/django%(ext)s.po' % {
             'path': locale_dir, 'lang': lang, 'ext': 'js' if app_name.endswith('-js') else ''}
-        call('msgcat -o %s %s' % (po_path, po_path), shell=True)
+        _run_command('msgcat -o %s %s' % (po_path, po_path))
         mo_path = '%s.mo' % po_path[:-3]
-        call('msgfmt -o %s %s' % (mo_path, po_path), shell=True)
+        _run_command('msgfmt -o %s %s' % (mo_path, po_path))
 
 
 def main():

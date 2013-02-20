@@ -13,7 +13,11 @@ install_requires = [
     'transifex-client',
 ],
 
-tests_require = []
+tests_require = [
+    'mock',
+    'nose',
+    'coverage',
+    ]
 
 setup(name='translations',
       version=version,
