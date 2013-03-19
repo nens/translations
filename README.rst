@@ -11,6 +11,16 @@ do translations via the Transifex server.
 Steps to create new resource in Transifex
 -----------------------------------------
 
+- Make sure you have the English translation files locally available.
+
+  TODO add documentation.
+
+  lizard_wms/locale/en/LC_MESSAGES
+
+  mkdir lizard_wms/locale
+
+  bin/django i18n -l en
+
 - Generate a project and resource on https://translations.lizard.net.
 
 - Use the same name structure like we use to name our projects on github:
@@ -59,6 +69,10 @@ Steps to add translations to project
         - Add to ``[console_scripts]``: ``dependent-scripts = true``, and
           ``eggs =``: add ``pyflakes`` and ``translations``.
 
+        - TODO: add bootstrap.py
+
+          wget http://downloads.buildout.org/2/bootstrap.py
+
 - Put translations entry with app_name in ``setup.cfg``, if repo name can not
   be resolved to app name (repo name should be same as app name
   (e.g. controlnext/controlnext) or by replacing hyphen with underscore,
@@ -79,6 +93,11 @@ Steps to update existing resource with updated source file (en)
 
 - Transifex picks up the updated source file from GitHub and shows the new
   fields in the source and translation files.
+
+- TODO: for that to work, add a source file url by clicking on "edit this
+  resource" in the transifex interface for your project. The url should be the
+  raw github url of the English ``.po`` file.
+
 
 Required
 --------
