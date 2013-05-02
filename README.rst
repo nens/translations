@@ -13,13 +13,14 @@ Steps to create new resource in Transifex
 
 - Make sure you have the English translation files locally available.
 
-  - TODO: add documentation
+  - Create a locale directory, e.g. ``mkdir -p lizard_ui/locale``.
 
-  - e.g. ``mkdir lizard_wms/locale``
+  - Write code with translatable strings, for more information see the
+    `django docs <https://docs.djangoproject.com/en/dev/topics/i18n/translation/#standard-translation>`_
+    about translation.
 
-  - ``bin/django i18n -l en``
-
-  - ``lizard_wms/locale/en/LC_MESSAGES``
+  - Run ``bin/django i18n -l en`` to generate the initial english django.po
+    source file.
 
 - Generate a project and resource on https://translations.lizard.net.
 
@@ -54,25 +55,8 @@ Steps to add translations to project
 
 - Add ``translations`` to your project's ``setup.py`` (``install_requires``).
 
-- Use ``zc.buildout`` >= ``2.0.1``:
-
-  - Add ``zc.buildout >= 2.0.1`` to your project's ``setup.py``
-    (``install_requires``).
-
-  - Update ``buildout.cfg`` for ``2.0.1``:
-
-    - Add to ``[buildout]``: ``show-picked-versions = true``
-
-    - Remove from ``[buildout]``: ``versions =``
-
-    - Add to ``[versions]``: ``zc.buildout = 2.0.1``
-
-    - Add to ``[console_scripts]``: ``dependent-scripts = true``, and
-      ``eggs =``: add ``pyflakes`` and ``translations``.
-
-    - TODO: add bootstrap.py
-
-      ``wget http://downloads.buildout.org/2/bootstrap.py``
+- Use ``zc.buildout`` >= ``2.0.1``. This is needed to generate the required
+  ``bin/tx`` command for communicating with the Transifex server.
 
 - Put translations entry with app_name in ``setup.cfg``, if repo name can not
   be resolved to app name (repo name should be same as app name
