@@ -67,12 +67,12 @@ Steps to add translations to project
 
     - Add to ``[versions]``: ``zc.buildout = 2.0.1``
 
-     - Add to ``[console_scripts]``: ``dependent-scripts = true``, and
-       ``eggs =``: add ``pyflakes`` and ``translations``.
+    - Add to ``[console_scripts]``: ``dependent-scripts = true``, and
+      ``eggs =``: add ``pyflakes`` and ``translations``.
 
-     - TODO: add bootstrap.py
+    - TODO: add bootstrap.py
 
-       ``wget http://downloads.buildout.org/2/bootstrap.py``
+      ``wget http://downloads.buildout.org/2/bootstrap.py``
 
 - Put translations entry with app_name in ``setup.cfg``, if repo name can not
   be resolved to app name (repo name should be same as app name
