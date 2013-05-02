@@ -57,7 +57,7 @@ Steps to add translations to project
 - Use ``zc.buildout`` >= ``2.0.1``:
 
   - Add ``zc.buildout >= 2.0.1`` to your project's ``setup.py``
-      (``install_requires``).
+    (``install_requires``).
 
   - Update ``buildout.cfg`` for ``2.0.1``:
 
