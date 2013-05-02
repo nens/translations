@@ -26,8 +26,8 @@ Steps to create new resource in Transifex
 - Use the same name structure like we use to name our projects on github:
   ``<project>/<resource>``, e.g. lizardsystem/lizard-ui.
 
-- If not exists, create a .tx/config in the root of the translatable project,
-  e.g.: ``lizard-ui/.tx/config`` (see example).
+- If not exists, create a ``.tx/config`` in the root of the translatable
+  project, e.g.: ``lizard-ui/.tx/config`` (see example).
 
 - Create the desired translations in the corresponding resource, e.g. nl, zh,
   vi.
@@ -52,15 +52,16 @@ Steps to create new resource in Transifex
 Steps to add translations to project
 ------------------------------------
 
-- Add translations to project's setup.py (install_requires).
+- Add ``translations`` to your project's ``setup.py`` (``install_requires``).
 
-- Use zc.buildout >= 2.0.1:
+- Use ``zc.buildout`` >= ``2.0.1``:
 
-    - Add zc.buildout >= 2.0.1 to project's setup.py (install_requires).
+    - Add ``zc.buildout >= 2.0.1`` to your project's ``setup.py``
+      (``install_requires``).
 
-    - Update buildout.cfg for 2.0.1:
+    - Update ``buildout.cfg`` for ``2.0.1``:
 
-        - Add to ``[buildout]``: show-picked-versions = true
+        - Add to ``[buildout]``: ``show-picked-versions = true``
 
         - Remove from ``[buildout]``: ``versions =``
 
@@ -71,7 +72,7 @@ Steps to add translations to project
 
         - TODO: add bootstrap.py
 
-          wget http://downloads.buildout.org/2/bootstrap.py
+          ``wget http://downloads.buildout.org/2/bootstrap.py``
 
 - Put translations entry with app_name in ``setup.cfg``, if repo name can not
   be resolved to app name (repo name should be same as app name
