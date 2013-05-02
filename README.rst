@@ -13,13 +13,13 @@ Steps to create new resource in Transifex
 
 - Make sure you have the English translation files locally available.
 
-  TODO add documentation.
+  - TODO: add documentation
 
-  lizard_wms/locale/en/LC_MESSAGES
+  - e.g. ``mkdir lizard_wms/locale``
 
-  mkdir lizard_wms/locale
+  - ``bin/django i18n -l en``
 
-  bin/django i18n -l en
+  - ``lizard_wms/locale/en/LC_MESSAGES``
 
 - Generate a project and resource on https://translations.lizard.net.
 
