@@ -55,9 +55,10 @@ Steps to add translations to project
 
 - Add ``translations`` to your project's ``setup.py`` (``install_requires``).
 
-- Add ``translations`` to ``console_scripts`` section in your ``setup.py``.
+- Add ``translations`` and ``dependent-scripts = true`` to ``console_scripts``
+  section in your projects's ``buildout.cfg``.
 
-``setup.py`` example console_scripts section::
+``buildout.cfg`` example ``console_scripts`` section::
 
     [console_scripts]
     dependent-scripts = true
