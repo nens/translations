@@ -55,6 +55,15 @@ Steps to add translations to project
 
 - Add ``translations`` to your project's ``setup.py`` (``install_requires``).
 
+- Add ``translations`` to ``console_scripts`` section in your ``setup.py``.
+
+``setup.py`` example console_scripts section:
+
+    [console_scripts]
+    dependent-scripts = true
+    eggs =
+        translations
+
 - Use ``zc.buildout`` >= ``2.0.1``. This is needed to generate the required
   ``bin/tx`` command for communicating with the Transifex server.
 
